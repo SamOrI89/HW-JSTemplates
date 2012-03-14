@@ -116,6 +116,32 @@
 <script type="text/javascript" src="icanhaz.min.js"></script>
 
 <script type="text/javascript">
+	
+	$('#search-button').click(function(){
+		var searchTerm = $('#search').val();
+
+		$('#user-list').empty();
+		$('#tweet-list').empty();
+
+		if (searchTerm !== '')
+		$.ajax({
+			url: 'http://search.twitter.com/search.json?q='+searchTerm+'&rpp=20&include_entities=false&result_type=mixed',
+			dataType: 'jsonp',
+			type: 'GET',
+			jsonpCallback: 'handle_tweets'
+		});
+	});
+
+	function handle_tweets(data)
+	{
+		for (var i = 0;i < data.results.length;i++)
+		{
+			$('#user-list').append('<a href="http://twitter.com/'+data.results[i].from_user+'"><img src="'+data.results[i].profile_image_url+'" /></a>');
+			$('#tweet-list').append('<li>'+data.results[i].text+'</li>');
+		}		
+		
+
+	}
 	// YOUR JS GOES HERE
 	// here's the twitter URL template
 	// http://search.twitter.com/search.json?q=SEARCH_VALUE_HERE&rpp=20&include_entities=false&result_type=mixed
