@@ -134,10 +134,11 @@
 
 	function handle_tweets(data)
 	{
+		console.log(data.results);
 		for (var i = 0;i < data.results.length;i++)
 		{
 			$('#user-list').append('<a href="http://twitter.com/'+data.results[i].from_user+'"><img src="'+data.results[i].profile_image_url+'" /></a>');
-			$('#tweet-list').append('<li>'+data.results[i].text+'</li>');
+			$('#tweet-list').append('<li>'+data.results[i].text+'</li><br />');
 		}		
 		
 
