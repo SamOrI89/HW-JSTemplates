@@ -121,20 +121,23 @@
 	$(document).ready(function()
 	{
 		$('header').css('font-size', '200%')
-	});
 	
-	$('#search-button').click(function(){
-		var searchTerm = $('#search').val();
+		$('#search-button').click(function(){
+			var searchTerm = $('#search').val();
 
-		$('#user-list').empty();
-		$('#tweet-list').empty();
+			$('#user-list').empty();
+			$('#tweet-list').empty();
 
-		if (searchTerm !== '')
-		$.ajax({
-			url: 'http://search.twitter.com/search.json?q='+searchTerm+'&rpp=20&include_entities=false&result_type=mixed',
-			dataType: 'jsonp',
-			type: 'GET',
-			jsonpCallback: 'handle_tweets'
+			if (searchTerm !== '')
+			{
+				$.ajax({
+					url: 'http://search.twitter.com/search.json?q='+searchTerm+'&rpp=20&include_entities=false&result_type=mixed',
+					dataType: 'jsonp',
+					type: 'GET',
+					jsonpCallback: 'handle_tweets'
+				});
+			}
+			
 		});
 	});
 
