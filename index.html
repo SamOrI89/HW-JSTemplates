@@ -141,11 +141,46 @@
 		});
 	});
 
+	function displayUser(tweet)
+	{
+		var userDiv = $('<div></div>');
+			userDiv.addClass('user');
+
+			userDiv.append('<a href="http://twitter.com/'+tweet.from_user+'"><img src="'+tweet.profile_image_url+'" /></a>');
+
+			$('#user-list').append(userDiv);
+
+			return userDiv;
+	}
+
+	function displayTweet(tweet)
+	{
+		var userDiv = displayUser(tweet);
+
+			var li = $('<li></li>');
+			li.append(userDiv);
+
+
+			var span = $('<span></span>');
+			span.html(tweet.text);
+
+			li.append(span);
+			li.append('<br />')
+
+			li.addClass('tweet');
+			$('#tweet-list').append(li);
+	}
+
 	function handle_tweets(data)
-	{for (var i = 0;i < data.results.length;i++)
+	{
+		var tweet;
+		for (var i = 0;i < data.results.length;i++)
 		{
-			$('#user-list').append('<a href="http://twitter.com/'+data.results[i].from_user+'"><img src="'+data.results[i].profile_image_url+'" /></a>');
-			$('#tweet-list').append('<li>'+data.results[i].text+'</li><br />');
+			tweet = data.results[i];
+			
+			displayUser(tweet);
+
+			displayTweet(tweet);
 		}		
 	}
 	// YOUR JS GOES HERE
