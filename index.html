@@ -146,7 +146,11 @@
 		var userDiv = $('<div></div>');
 			userDiv.addClass('user');
 
-			userDiv.append('<a href="http://twitter.com/'+tweet.from_user+'"><img src="'+tweet.profile_image_url+'" /></a>');
+			var link = $('<a href="http://twitter.com/'+tweet.from_user+'"></a>');
+			var image = $('"<img src="'+tweet.profile_image_url+'" />');
+
+			link.append(image);
+			userDiv.append(link);
 
 			$('#user-list').append(userDiv);
 
